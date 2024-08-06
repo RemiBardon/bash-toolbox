@@ -23,6 +23,10 @@ format_arg() {
 format_opt_arg() {
 	printf "${Cyan}[$*]${Color_Off}"
 }
+
 format_title() {
 	printf "${BGreen}$*${Color_Off}"
+}
+format_subtitle() {
+	printf "${Green}$*${Color_Off}"
 }
