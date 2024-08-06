@@ -2,9 +2,6 @@
 #
 # Some reusable logging functions.
 
-# Configure the script to exit when a command fails.
-set -e
-
 ask_yes_no() {
 	question ${1:?}
 	local yes_no_default=${2:?} yes_no_answer
