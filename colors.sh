@@ -16,6 +16,8 @@ Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'        # White
 
 # Bold
+Bold='\033[1m'            # Bold
+Bold_Off='\033[22m'       # Bold Reset
 BBlack='\033[1;30m'       # Black
 BRed='\033[1;31m'         # Red
 BGreen='\033[1;32m'       # Green
@@ -26,6 +28,8 @@ BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
 # Dark
+Dark='\033[2m'            # Dark
+Dark_Off='\033[22m'       # Dark Reset
 DBlack='\033[2;30m'       # Black
 DRed='\033[2;31m'         # Red
 DGreen='\033[2;32m'       # Green
