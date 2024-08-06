@@ -90,3 +90,7 @@ On_IBlue='\033[0;104m'    # Blue
 On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
+
+decolor() {
+	sed -r 's/\x1B\[[0-9;]*[a-zA-Z]//g'
+}
