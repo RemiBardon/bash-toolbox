@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source "$(dirname "$0")"/colors.sh
+source "$(dirname "$0")"/format.sh
+
+printf "${Bold}# Formatting${Bold_Off}\n\n"
+
+printf "You can do ${Bold}bold${Bold_Off}, ${Underline}underline${Underline_Off} or ${Dark}dim${Dark_Off} text.\n"
+printf "You can also do ${Yellow}yellow${Color_Off} or ${Red}a${Green}n${Blue}y${Color_Off} ${Purple}co${Cyan}lor${Color_Off} text.\n"
+printf "Here is how are formatted $(format_url 'URLs'), $(format_code 'code'), $(format_command 'commands'), $(format_flag 'flags'), $(format_arg 'args'), $(format_opt_arg 'optional args'), $(format_title 'titles') and $(format_secondary 'secondary text').\n"
