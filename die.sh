@@ -1,4 +1,4 @@
-source "$(dirname "$0")"/log.sh
+source "${BASH_TOOLBOX-"$(dirname "$0")"}"/log.sh
 
 die() {
 	error $@

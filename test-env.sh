@@ -1,4 +1,4 @@
-source "$(dirname "$0")"/die.sh
+source "${BASH_TOOLBOX-"$(dirname "$0")"}"/die.sh
 
 test_env_var() {
 	local var_name="$1"

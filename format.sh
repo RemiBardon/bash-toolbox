@@ -1,6 +1,6 @@
 # Some functions to help formatting.
 
-source "$(dirname "$0")"/colors.sh
+source "${BASH_TOOLBOX-"$(dirname "$0")"}"/colors.sh
 
 format_secondary() {
 	printf "${DWhite}$*${Color_Off}"

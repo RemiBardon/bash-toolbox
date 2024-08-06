@@ -1,7 +1,7 @@
 # Some reusable logging functions.
 
-source "$(dirname "$0")"/colors.sh
-source "$(dirname "$0")"/format.sh
+source "${BASH_TOOLBOX-"$(dirname "$0")"}"/colors.sh
+source "${BASH_TOOLBOX-"$(dirname "$0")"}"/format.sh
 
 LOG_TRACE=${LOG_TRACE:-0}
 LOG_DEBUG=${LOG_DEBUG:-1}
