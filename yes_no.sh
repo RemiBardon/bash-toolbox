@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-#
 # Some reusable logging functions.
 
 ask_yes_no() {

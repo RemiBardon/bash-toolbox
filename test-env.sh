@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 source "$(dirname "$0")"/die.sh
 
 test_env_var() {

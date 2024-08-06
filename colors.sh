@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-#
 # Some variables to make coloring easier.
 
 # Copyright © <https://stackoverflow.com/a/28938235/10967642>.

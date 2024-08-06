@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-#
 # Some reusable logging functions.
 
 source "$(dirname "$0")"/colors.sh

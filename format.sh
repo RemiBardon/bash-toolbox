@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-#
 # Some functions to help formatting.
 
 source "$(dirname "$0")"/colors.sh
