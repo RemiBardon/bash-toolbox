@@ -16,6 +16,7 @@ source "${BASH_TOOLBOX:?}"/format.sh
 printf "\n${Bold}# Formatting${Bold_Off}\n\n"
 
 printf "Here is how are formatted $(format_url 'URLs'), $(format_code 'code'), $(format_command 'commands'), $(format_flag 'flags'), $(format_arg 'args'), $(format_opt_arg 'optional args'), $(format_title 'titles'), $(format_subtitle 'subtitles') and $(format_secondary 'secondary text').\n"
+printf "You can also print $(format_hyperlink 'hyperlinks' 'https://github.com/RemiBardon/bash-toolbox')!\n"
 
 printf "\n${Bold}# Decoloring${Bold_Off}\n\n"
 printf "Some $(format_code "decolored inline code" | decolor) and some $(format_url "decolored URL" | decolor).\n"

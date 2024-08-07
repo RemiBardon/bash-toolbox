@@ -8,6 +8,13 @@ format_secondary() {
 format_url() {
 	printf '%s' "${Underline}$(decolor <<< $*)${Underline_Off}"
 }
+format_hyperlink() {
+	if [ "$#" -ne 2 ]; then
+		warn "$(format_code format_hyperlink) expects 2 arguments. Got $#." >&2
+		printf '<invalid_hyperlink>'
+	fi
+	printf '%s' "\033]8;;$2\033\\$(decolor <<< $1)\033]8;;\033\\"
+}
 format_code() {
 	printf '%s' "${Cyan}\`$(decolor <<< $*)\`${Color_Off}"
 }
