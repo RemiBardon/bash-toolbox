@@ -91,6 +91,11 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
+ANSI_ESC='\\\033\['
+ANSI_NO_DECOLOR='(4|24)m'
+
 decolor() {
-	sed -r 's/\x1B\[[0-9;]*[a-zA-Z]//g'
+	sed -r 's/('"${ANSI_ESC}"')('"${ANSI_NO_DECOLOR}"')/\1%%%\2/g' \
+		| sed -r 's/'"${ANSI_ESC}"'[0-9;]+m//g' \
+		| sed -r 's/('"${ANSI_ESC}"')%%%('"${ANSI_NO_DECOLOR}"')/\1\2/g'
 }

@@ -1,11 +1,28 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$0")"/colors.sh
-source "$(dirname "$0")"/format.sh
+BASH_TOOLBOX="$(dirname "$0")"
 
-printf "${Bold}# Formatting${Bold_Off}\n\n"
+# Make sure everything is logged.
+LOG_TRACE=1 LOG_DEBUG=1 LOG_INFO=1 LOG_WARN=1
+LOG_DRY_RUN=1
+
+source "${BASH_TOOLBOX:?}"/colors.sh
+printf "${Bold}# Coloring${Bold_Off}\n\n"
 
 printf "You can do ${Bold}bold${Bold_Off}, ${Underline}underline${Underline_Off} or ${Dark}dim${Dark_Off} text.\n"
 printf "You can also do ${Yellow}yellow${Color_Off} or ${Red}a${Green}n${Blue}y${Color_Off} ${Purple}co${Cyan}lor${Color_Off} text.\n"
+
+source "${BASH_TOOLBOX:?}"/format.sh
+printf "\n${Bold}# Formatting${Bold_Off}\n\n"
+
 printf "Here is how are formatted $(format_url 'URLs'), $(format_code 'code'), $(format_command 'commands'), $(format_flag 'flags'), $(format_arg 'args'), $(format_opt_arg 'optional args'), $(format_title 'titles'), $(format_subtitle 'subtitles') and $(format_secondary 'secondary text').\n"
-printf "Some $(format_code "decolored inline code" | decolor).\n"
+
+printf "\n${Bold}# Decoloring${Bold_Off}\n\n"
+printf "Some $(format_code "decolored inline code" | decolor) and some $(format_url "decolored URL" | decolor).\n"
+
+source "${BASH_TOOLBOX:?}"/log.sh
+printf "\n${Bold}# Logging${Bold_Off}\n\n"
+
+error "Some $(format_code 'formatted text') in an error"
+warn "An $(format_url 'URL') in a warning"
+trace "Some ${Bold}bold text${Bold_Off} in a trace"
