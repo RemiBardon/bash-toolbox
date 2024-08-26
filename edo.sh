@@ -10,3 +10,10 @@ edo() {
 	fi
 	return $?
 }
+
+# Like `edo` but with no dry run logic.
+traced() {
+	trace $@
+	# NOTE: `eval $@` would break spaces in arguments.
+	eval $(printf '%q ' "$@")
+}
