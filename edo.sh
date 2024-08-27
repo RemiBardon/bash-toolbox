@@ -6,7 +6,8 @@ edo() {
 	else
 		trace $@
 		# NOTE: `eval $@` would break spaces in arguments.
-		eval $(printf '%q ' "$@")
+		# NOTE: `sed 's/\\|/|/'` allows passing a pipe as argument.
+		eval $(printf '%q ' "$@" | sed 's/\\|/|/')
 	fi
 	return $?
 }
@@ -15,5 +16,6 @@ edo() {
 traced() {
 	trace $@
 	# NOTE: `eval $@` would break spaces in arguments.
-	eval $(printf '%q ' "$@")
+	# NOTE: `sed 's/\\|/|/'` allows passing a pipe as argument.
+	eval $(printf '%q ' "$@" | sed 's/\\|/|/')
 }
