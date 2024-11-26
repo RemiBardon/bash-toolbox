@@ -12,29 +12,29 @@ LOG_DRY_RUN=${LOG_DRY_RUN:-${DRY_RUN}}
 LOGGER_MARGIN="          "
 
 trace() {
-	(( $LOG_TRACE )) && printf "  ${DWhite}[${Purple}TRACE${DWhite}]${Color_Off} $(format_secondary $*)\n" || return 0
+	(( $LOG_TRACE )) && printf "  ${DWhite}[${Purple}TRACE${DWhite}]${Color_Off} $(format_secondary "$@")\n" || return 0
 }
 debug() {
-	(( $LOG_DEBUG )) && printf "  ${DWhite}[${White}DEBUG${DWhite}]${Color_Off} ${Black}${On_Yellow}$(decolor <<< $*)${Color_Off}\n" || return 0
+	(( $LOG_DEBUG )) && printf "  ${DWhite}[${White}DEBUG${DWhite}]${Color_Off} ${Black}${On_Yellow}$(decolor <<< "$@")${Color_Off}\n" || return 0
 }
 info() {
-	(( $LOG_INFO )) && printf "   ${DWhite}[${Blue}INFO${DWhite}]${Color_Off} $*\n" || return 0
+	(( $LOG_INFO )) && printf "   ${DWhite}[${Blue}INFO${DWhite}]${Color_Off} $@\n" || return 0
 }
 warn() {
-	(( $LOG_WARN )) && printf "   ${DWhite}[${Yellow}WARN${DWhite}]${Color_Off} ${Yellow}$(decolor <<< $*)${Color_Off}\n" || return 0
+	(( $LOG_WARN )) && printf "   ${DWhite}[${Yellow}WARN${DWhite}]${Color_Off} ${Yellow}$(decolor <<< "$@")${Color_Off}\n" || return 0
 }
 error() {
-	printf "  ${DWhite}[${Red}ERROR${DWhite}]${Color_Off} ${Red}$(decolor <<< $*)${Color_Off}\n"
+	printf "  ${DWhite}[${Red}ERROR${DWhite}]${Color_Off} ${Red}$(decolor <<< "$@")${Color_Off}\n"
 }
 success() {
-	printf "     ${DWhite}[${Green}OK${DWhite}]${Color_Off} $*\n"
+	printf "     ${DWhite}[${Green}OK${DWhite}]${Color_Off} $@\n"
 }
 question() {
-	printf "    ${DWhite}[${Cyan}???${DWhite}]${Color_Off} $*\n"
+	printf "    ${DWhite}[${Cyan}???${DWhite}]${Color_Off} $@\n"
 }
 dry_run() {
 	# NOTE: Remove leading underscore-prefixed functions, to avoid logging things like `_log_as_info`.
-	local command=$(echo $* | sed -E 's/^(_[a-zA-Z0-9_]* )+//')
+	local command=$(echo "$@" | sed -E 's/^(_[a-zA-Z0-9_]* )+//')
 	(( $LOG_DRY_RUN )) && printf "${DWhite}[${White}DRY_RUN${DWhite}]${Color_Off} sh> $(format_secondary $command)\n" || return 0
 }
 

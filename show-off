@@ -27,3 +27,8 @@ printf "\n${Bold}# Logging${Bold_Off}\n\n"
 error "Some $(format_code 'formatted text') in an error"
 warn "An $(format_url 'URL') in a warning"
 trace "Some ${Bold}bold text${Bold_Off} in a trace"
+info "$(cat <<EOF
+It also works
+with multiline text
+EOF
+)"

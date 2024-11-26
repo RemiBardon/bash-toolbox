@@ -3,10 +3,10 @@
 source "${BASH_TOOLBOX-"$(dirname "$0")"}"/colors.sh
 
 format_secondary() {
-	printf '%s' "${DWhite}$(decolor <<< $*)${Color_Off}"
+	printf '%s' "${Dark}$(decolor <<< "$@")${Dark_Off}"
 }
 format_url() {
-	printf '%s' "${Underline}$(decolor <<< $*)${Underline_Off}"
+	printf '%s' "${Underline}$(decolor <<< "$@")${Underline_Off}"
 }
 format_hyperlink() {
 	if [ "$#" -ne 2 ]; then
@@ -16,24 +16,24 @@ format_hyperlink() {
 	printf '%s' "\033]8;;$2\033\\$(decolor <<< $1)\033]8;;\033\\"
 }
 format_code() {
-	printf '%s' "${Cyan}\`$(decolor <<< $*)\`${Color_Off}"
+	printf '%s' "${Cyan}\`$(decolor <<< "$@")\`${Color_Off}"
 }
 format_command() {
-	printf '%s' "${BCyan}$(decolor <<< $*)${Color_Off}"
+	printf '%s' "${BCyan}$(decolor <<< "$@")${Color_Off}"
 }
 format_flag() {
-	printf '%s' "${BCyan}$(decolor <<< $*)${Color_Off}"
+	printf '%s' "${BCyan}$(decolor <<< "$@")${Color_Off}"
 }
 format_arg() {
-	printf '%s' "${Cyan}$(decolor <<< $*)${Color_Off}"
+	printf '%s' "${Cyan}$(decolor <<< "$@")${Color_Off}"
 }
 format_opt_arg() {
-	printf '%s' "${Cyan}[$(decolor <<< $*)]${Color_Off}"
+	printf '%s' "${Cyan}[$(decolor <<< "$@")]${Color_Off}"
 }
 
 format_title() {
-	printf '%s' "${BGreen}$(decolor <<< $*)${Color_Off}"
+	printf '%s' "${BGreen}$(decolor <<< "$@")${Color_Off}"
 }
 format_subtitle() {
-	printf '%s' "${Green}$(decolor <<< $*)${Color_Off}"
+	printf '%s' "${Green}$(decolor <<< "$@")${Color_Off}"
 }
