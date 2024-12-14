@@ -54,5 +54,5 @@ log_as_error_() {
 	"$@" | while read -r line; do error "$line"; done
 }
 log_as_success_() {
-	"$@" | while read -r line; do info "$line"; done
+	"$@" | while read -r line; do success "$line"; done
 }
