@@ -39,20 +39,20 @@ dry_run() {
 }
 
 _log_as_trace() {
-	$@ | while read -r line; do trace "$line"; done
+	"$@" | while read -r line; do trace "$line"; done
 }
 _log_as_debug() {
-	$@ | while read -r line; do debug "$line"; done
+	"$@" | while read -r line; do debug "$line"; done
 }
 _log_as_info() {
-	$@ | while read -r line; do info "$line"; done
+	"$@" | while read -r line; do info "$line"; done
 }
 _log_as_warn() {
-	$@ | while read -r line; do warn "$line"; done
+	"$@" | while read -r line; do warn "$line"; done
 }
 _log_as_error() {
-	$@ | while read -r line; do error "$line"; done
+	"$@" | while read -r line; do error "$line"; done
 }
 _log_as_success() {
-	$@ | while read -r line; do info "$line"; done
+	"$@" | while read -r line; do info "$line"; done
 }
