@@ -33,26 +33,26 @@ question() {
 	printf "    ${DWhite}[${Cyan}???${DWhite}]${Color_Off} $@\n"
 }
 dry_run() {
-	# NOTE: Remove leading underscore-prefixed functions, to avoid logging things like `_log_as_info`.
-	local command=$(echo "$@" | sed -E 's/^(_[a-zA-Z0-9_]* )+//')
+	# NOTE: Remove leading underscore-prefixed functions, to avoid logging things like `log_as_info_`.
+	local command=$(echo "$@" | sed -E 's/^([a-zA-Z0-9_]*_ )+//')
 	(( $LOG_DRY_RUN )) && printf "${DWhite}[${White}DRY_RUN${DWhite}]${Color_Off} sh> $(format_secondary $command)\n" || return 0
 }
 
-_log_as_trace() {
+log_as_trace_() {
 	"$@" | while read -r line; do trace "$line"; done
 }
-_log_as_debug() {
+log_as_debug_() {
 	"$@" | while read -r line; do debug "$line"; done
 }
-_log_as_info() {
+log_as_info_() {
 	"$@" | while read -r line; do info "$line"; done
 }
-_log_as_warn() {
+log_as_warn_() {
 	"$@" | while read -r line; do warn "$line"; done
 }
-_log_as_error() {
+log_as_error_() {
 	"$@" | while read -r line; do error "$line"; done
 }
-_log_as_success() {
+log_as_success_() {
 	"$@" | while read -r line; do info "$line"; done
 }
