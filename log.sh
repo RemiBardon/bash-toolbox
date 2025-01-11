@@ -3,11 +3,19 @@
 source "${BASH_TOOLBOX-"$(dirname "$0")"}"/colors.sh
 source "${BASH_TOOLBOX-"$(dirname "$0")"}"/format.sh
 
-LOG_TRACE=${LOG_TRACE:-0}
-LOG_DEBUG=${LOG_DEBUG:-1}
-LOG_INFO=${LOG_INFO:-1}
-LOG_WARN=${LOG_WARN:-1}
-LOG_DRY_RUN=${LOG_DRY_RUN:-${DRY_RUN}}
+# Add support for GitHub Actions debug logging.
+# See <https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/troubleshooting-workflows/enabling-debug-logging#enabling-step-debug-logging>.
+[ -n "${ACTIONS_STEP_DEBUG-}" ] && LOG_TRACE=1 || :
+# Apply inheritance.
+: ${LOG_DEBUG:="${LOG_TRACE-}"}
+: ${LOG_INFO:="${LOG_DEBUG-}"}
+: ${LOG_WARN:="${LOG_INFO-}"}
+# Apply defaults.
+: ${LOG_TRACE:=0}
+: ${LOG_DEBUG:=1}
+: ${LOG_INFO:=1}
+: ${LOG_WARN:=1}
+: ${LOG_DRY_RUN:="${DRY_RUN:-0}"}
 
 LOGGER_MARGIN="          "
 
