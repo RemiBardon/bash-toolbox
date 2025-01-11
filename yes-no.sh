@@ -1,4 +1,4 @@
-ask_yes_no() {
+ask-yes-no() {
 	question "${1:?}"
 	local yes_no_default="${2:?}" yes_no_answer
 
@@ -19,9 +19,9 @@ ask_yes_no() {
 	esac
 }
 
-if_yes() {
+if-yes() {
 	local q="${1:?}"
 	local yes_no_default="${2:?}"
 	shift 2
-	ask_yes_no "$q" "$yes_no_default" && edo $@
+	ask-yes-no "$q" "$yes_no_default" && edo $@
 }
