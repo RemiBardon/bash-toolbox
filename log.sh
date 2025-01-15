@@ -5,17 +5,17 @@ source "${BASH_TOOLBOX-"$(dirname "$0")"}"/format.sh
 
 # Add support for GitHub Actions debug logging.
 # See <https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/troubleshooting-workflows/enabling-debug-logging#enabling-step-debug-logging>.
-[ -n "${ACTIONS_STEP_DEBUG-}" ] && LOG_TRACE=1 || :
-# Apply inheritance.
-: ${LOG_DEBUG:="${LOG_TRACE-}"}
-: ${LOG_INFO:="${LOG_DEBUG-}"}
-: ${LOG_WARN:="${LOG_INFO-}"}
+if [ -n "${ACTIONS_STEP_DEBUG-}" ]; then LOG_TRACE=1; fi
 # Apply defaults.
 : ${LOG_TRACE:=0}
 : ${LOG_DEBUG:=1}
 : ${LOG_INFO:=1}
 : ${LOG_WARN:=1}
-: ${LOG_DRY_RUN:="${DRY_RUN:-0}"}
+# Apply inheritance.
+if (( $LOG_TRACE )); then LOG_DEBUG=1; fi
+if (( $LOG_DEBUG )); then LOG_INFO=1; fi
+if (( $LOG_INFO )); then LOG_WARN=1; fi
+if (( $DRY_RUN )); then LOG_DRY_RUN=1; fi
 
 LOGGER_MARGIN="          "
 
