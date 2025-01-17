@@ -20,30 +20,30 @@ if (( $DRY_RUN )); then LOG_DRY_RUN=1; fi
 LOGGER_MARGIN="          "
 
 trace() {
-	(( $LOG_TRACE )) && printf "  ${DWhite}[${Purple}TRACE${DWhite}]${Color_Off} $(format_secondary "$@")\n" || return 0
+	(( $LOG_TRACE )) && printf "  ${DWhite}[${Purple}TRACE${DWhite}]${Color_Off} $(format_secondary "$@")\n" >&2 || return 0
 }
 debug() {
-	(( $LOG_DEBUG )) && printf "  ${DWhite}[${White}DEBUG${DWhite}]${Color_Off} ${Black}${On_Yellow}$(decolor <<< "$@")${Color_Off}\n" || return 0
+	(( $LOG_DEBUG )) && printf "  ${DWhite}[${White}DEBUG${DWhite}]${Color_Off} ${Black}${On_Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2 || return 0
 }
 info() {
-	(( $LOG_INFO )) && printf "   ${DWhite}[${Blue}INFO${DWhite}]${Color_Off} $@\n" || return 0
+	(( $LOG_INFO )) && printf "   ${DWhite}[${Blue}INFO${DWhite}]${Color_Off} $@\n" >&2 || return 0
 }
 warn() {
-	(( $LOG_WARN )) && printf "   ${DWhite}[${Yellow}WARN${DWhite}]${Color_Off} ${Yellow}$(decolor <<< "$@")${Color_Off}\n" || return 0
+	(( $LOG_WARN )) && printf "   ${DWhite}[${Yellow}WARN${DWhite}]${Color_Off} ${Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2 || return 0
 }
 error() {
-	printf "  ${DWhite}[${Red}ERROR${DWhite}]${Color_Off} ${Red}$(decolor <<< "$@")${Color_Off}\n"
+	printf "  ${DWhite}[${Red}ERROR${DWhite}]${Color_Off} ${Red}$(decolor <<< "$@")${Color_Off}\n" >&2
 }
 success() {
-	printf "     ${DWhite}[${Green}OK${DWhite}]${Color_Off} $@\n"
+	printf "     ${DWhite}[${Green}OK${DWhite}]${Color_Off} $@\n" >&2
 }
 question() {
-	printf "    ${DWhite}[${Cyan}???${DWhite}]${Color_Off} $@\n"
+	printf "    ${DWhite}[${Cyan}???${DWhite}]${Color_Off} $@\n" >&2
 }
 dry_run() {
 	# NOTE: Remove leading underscore-prefixed functions, to avoid logging things like `log_as_info_`.
 	local command=$(echo "$@" | sed -E 's/^([a-zA-Z0-9_]*_ )+//')
-	(( $LOG_DRY_RUN )) && printf "${DWhite}[${White}DRY_RUN${DWhite}]${Color_Off} sh> $(format_secondary $command)\n" || return 0
+	(( $LOG_DRY_RUN )) && printf "${DWhite}[${White}DRY_RUN${DWhite}]${Color_Off} sh> $(format_secondary $command)\n" >&2 || return 0
 }
 
 log_as_trace_() {
