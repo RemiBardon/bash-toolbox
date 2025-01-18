@@ -47,20 +47,20 @@ dry_run() {
 }
 
 log_as_trace_() {
-	"$@" | while read -r line; do trace "$line"; done
+	"$@" 2>&1 | while read -r line; do trace "$line"; done
 }
 log_as_debug_() {
-	"$@" | while read -r line; do debug "$line"; done
+	"$@" 2>&1 | while read -r line; do debug "$line"; done
 }
 log_as_info_() {
-	"$@" | while read -r line; do info "$line"; done
+	"$@" 2>&1 | while read -r line; do info "$line"; done
 }
 log_as_warn_() {
-	"$@" | while read -r line; do warn "$line"; done
+	"$@" 2>&1 | while read -r line; do warn "$line"; done
 }
 log_as_error_() {
-	"$@" | while read -r line; do error "$line"; done
+	"$@" 2>&1 | while read -r line; do error "$line"; done
 }
 log_as_success_() {
-	"$@" | while read -r line; do success "$line"; done
+	"$@" 2>&1 | while read -r line; do success "$line"; done
 }
