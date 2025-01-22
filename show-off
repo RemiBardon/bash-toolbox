@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 BASH_TOOLBOX="$(dirname "$0")"
 
 # Make sure everything is logged.
@@ -43,7 +45,12 @@ with multiline text
 EOF
 )"
 
+source "${BASH_TOOLBOX:?}"/edo.sh
 printf "\n${Bold}# Execute + log${Bold_Off}\n\n"
 
 printf "$(format_code 'log_as_info_ cat '"'$0'"' | head -n 3'):\n"
 log_as_info_ cat "$0" 2>&1 | head -n 3
+
+printf '\nExit codes are propagated:\n'
+
+( set +e; edo log_as_trace_ cp foo bar; info "Exit code: $?" )
