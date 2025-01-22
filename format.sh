@@ -16,7 +16,7 @@ format_hyperlink() {
 	printf '%s' "\033]8;;$2\033\\$(decolor <<< $1)\033]8;;\033\\"
 }
 format_code() {
-	printf '%s' "${Cyan}\`$(decolor <<< "$@")\`${Color_Off}"
+	printf '%s' "${DCyan}\`${Cyan}$(decolor <<< "$@")${DCyan}\`${Color_Off}"
 }
 format_command() {
 	printf '%s' "${BCyan}$(decolor <<< "$@")${Color_Off}"
@@ -28,7 +28,7 @@ format_arg() {
 	printf '%s' "${Cyan}$(decolor <<< "$@")${Color_Off}"
 }
 format_opt_arg() {
-	printf '%s' "${Cyan}[$(decolor <<< "$@")]${Color_Off}"
+	printf '%s' "${DCyan}[${Cyan}$(decolor <<< "$@")${DCyan}]${Color_Off}"
 }
 
 format_title() {

@@ -17,36 +17,36 @@ if (( $LOG_DEBUG )); then LOG_INFO=1; fi
 if (( $LOG_INFO )); then LOG_WARN=1; fi
 if (( $DRY_RUN )); then LOG_DRY_RUN=1; fi
 
-LOGGER_MARGIN="          "
+LOGGER_MARGIN="        "
 
 trace() {
 	if (( $LOG_TRACE )); then
-		printf "  ${DWhite}[${Purple}TRACE${DWhite}]${Color_Off} $(format_secondary "$@")\n" >&2
+		printf "${DPurple}[${Purple}TRACE${DPurple}]${Color_Off} $(format_secondary "$@")\n" >&2
 	fi
 }
 debug() {
 	if (( $LOG_DEBUG )); then
-		printf "  ${DWhite}[${White}DEBUG${DWhite}]${Color_Off} ${Black}${On_Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2
+		printf "${DWhite}[${White}DEBUG${DWhite}]${Color_Off} ${Black}${On_Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2
 	fi
 }
 info() {
 	if (( $LOG_INFO )); then
-		printf "   ${DWhite}[${Blue}INFO${DWhite}]${Color_Off} $@\n" >&2
+		printf " ${DBlue}[${Blue}INFO${DBlue}]${Color_Off} $@\n" >&2
 	fi
 }
 warn() {
 	if (( $LOG_WARN )); then
-		printf "   ${DWhite}[${Yellow}WARN${DWhite}]${Color_Off} ${Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2
+		printf " ${DYellow}[${Yellow}WARN${DYellow}]${Color_Off} ${Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2
 	fi
 }
 error() {
-	printf "  ${DWhite}[${Red}ERROR${DWhite}]${Color_Off} ${Red}$(decolor <<< "$@")${Color_Off}\n" >&2
+	printf "${DRed}[${Red}ERROR${DRed}]${Color_Off} ${Red}$(decolor <<< "$@")${Color_Off}\n" >&2
 }
 success() {
-	printf "     ${DWhite}[${Green}OK${DWhite}]${Color_Off} $@\n" >&2
+	printf "   ${DGreen}[${Green}OK${DGreen}]${Color_Off} $@\n" >&2
 }
 question() {
-	printf "    ${DWhite}[${Cyan}???${DWhite}]${Color_Off} $@\n" >&2
+	printf "  ${DCyan}[${Cyan}???${DCyan}]${Color_Off} $@\n" >&2
 }
 dry_run() {
 	# NOTE: Remove leading underscore-prefixed functions, to avoid logging things like `log_as_info_`.

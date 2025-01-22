@@ -24,6 +24,16 @@ printf "Some $(format_code "decolored inline code" | decolor) and some $(format_
 source "${BASH_TOOLBOX:?}"/log.sh
 printf "\n${Bold}# Logging${Bold_Off}\n\n"
 
+trace "A $(format_code trace) log"
+debug "A $(format_code debug) log"
+info "A $(format_code info) log"
+warn "A $(format_code warn) log"
+error "A $(format_code error) log"
+success "A $(format_code success) log"
+question "A $(format_code question) log"
+
+printf "\n${Bold}# Logging + style${Bold_Off}\n\n"
+
 error "Some $(format_code 'formatted text') in an error"
 warn "An $(format_url 'URL') in a warning"
 trace "Some ${Bold}bold text${Bold_Off} in a trace"
@@ -32,3 +42,8 @@ It also works
 with multiline text
 EOF
 )"
+
+printf "\n${Bold}# Execute + log${Bold_Off}\n\n"
+
+printf "$(format_code 'log_as_info_ cat '"'$0'"' | head -n 3'):\n"
+log_as_info_ cat "$0" 2>&1 | head -n 3
