@@ -47,20 +47,20 @@ dry_run() {
 }
 
 log_as_trace_() {
-	"$@" 2>&1 | while read -r line; do trace "$line"; done
+	( set -o pipefail; "$@" 2>&1 | while read -r line; do trace "$line"; done)
 }
 log_as_debug_() {
-	"$@" 2>&1 | while read -r line; do debug "$line"; done
+	( set -o pipefail; "$@" 2>&1 | while read -r line; do debug "$line"; done)
 }
 log_as_info_() {
-	"$@" 2>&1 | while read -r line; do info "$line"; done
+	( set -o pipefail; "$@" 2>&1 | while read -r line; do info "$line"; done)
 }
 log_as_warn_() {
-	"$@" 2>&1 | while read -r line; do warn "$line"; done
+	( set -o pipefail; "$@" 2>&1 | while read -r line; do warn "$line"; done)
 }
 log_as_error_() {
-	"$@" 2>&1 | while read -r line; do error "$line"; done
+	( set -o pipefail; "$@" 2>&1 | while read -r line; do error "$line"; done)
 }
 log_as_success_() {
-	"$@" 2>&1 | while read -r line; do success "$line"; done
+	( set -o pipefail; "$@" 2>&1 | while read -r line; do success "$line"; done)
 }
