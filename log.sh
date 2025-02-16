@@ -12,15 +12,15 @@ if [ -n "${ACTIONS_STEP_DEBUG-}" ]; then LOG_TRACE=1; fi
 : ${LOG_INFO:=1}
 : ${LOG_WARN:=1}
 # Apply inheritance.
-if (( $LOG_TRACE )); then LOG_DEBUG=1; fi
-if (( $LOG_DEBUG )); then LOG_INFO=1; fi
-if (( $LOG_INFO )); then LOG_WARN=1; fi
-if (( $DRY_RUN )); then LOG_DRY_RUN=1; fi
+if (( ${LOG_TRACE:-0} )); then LOG_DEBUG=1; fi
+if (( ${LOG_DEBUG:-0} )); then LOG_INFO=1; fi
+if (( ${LOG_INFO:-0} )); then LOG_WARN=1; fi
+if (( ${DRY_RUN:-0} )); then LOG_DRY_RUN=1; fi
 
 LOGGER_MARGIN="        "
 
 trace_() {
-	if (( $LOG_TRACE )); then
+	if (( ${LOG_TRACE:-0} )); then
 		printf "${DPurple}[${Purple}TRACE${DPurple}]${Color_Off} $(format_secondary "$@")\n" >&2
 	fi
 }
@@ -28,7 +28,7 @@ trace() {
 	echo "$@" | while read -r line; do trace_ "$line"; done
 }
 debug_() {
-	if (( $LOG_DEBUG )); then
+	if (( ${LOG_DEBUG:-0} )); then
 		printf "${DWhite}[${White}DEBUG${DWhite}]${Color_Off} ${Black}${On_Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2
 	fi
 }
@@ -36,7 +36,7 @@ debug() {
 	echo "$@" | while read -r line; do debug_ "$line"; done
 }
 info_() {
-	if (( $LOG_INFO )); then
+	if (( ${LOG_INFO:-0} )); then
 		printf " ${DBlue}[${Blue}INFO${DBlue}]${Color_Off} $@\n" >&2
 	fi
 }
@@ -44,7 +44,7 @@ info() {
 	echo "$@" | while read -r line; do info_ "$line"; done
 }
 warn_() {
-	if (( $LOG_WARN )); then
+	if (( ${LOG_WARN:-0} )); then
 		printf " ${DYellow}[${Yellow}WARN${DYellow}]${Color_Off} ${Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2
 	fi
 }
@@ -72,7 +72,7 @@ question() {
 dry_run_() {
 	# NOTE: Remove leading underscore-prefixed functions, to avoid logging things like `log_as_info_`.
 	local command=$(echo "$@" | sed -E 's/^([a-zA-Z0-9_]*_ )+//')
-	if (( $LOG_DRY_RUN )); then
+	if (( ${LOG_DRY_RUN:-0} )); then
 		printf "${DWhite}[${White}DRY_RUN${DWhite}]${Color_Off} sh> $(format_secondary $command)\n" >&2
 	fi
 }
