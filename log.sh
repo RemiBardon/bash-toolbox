@@ -25,6 +25,7 @@ trace_() {
 	fi
 }
 trace() {
+	if [ -z "$*" ]; then return 0; fi
 	echo "$@" | while IFS= read -r line; do trace_ "$line"; done
 }
 debug_() {
@@ -33,6 +34,7 @@ debug_() {
 	fi
 }
 debug() {
+	if [ -z "$*" ]; then return 0; fi
 	echo "$@" | while IFS= read -r line; do debug_ "$line"; done
 }
 info_() {
@@ -41,6 +43,7 @@ info_() {
 	fi
 }
 info() {
+	if [ -z "$*" ]; then return 0; fi
 	echo "$@" | while IFS= read -r line; do info_ "$line"; done
 }
 warn_() {
@@ -49,24 +52,28 @@ warn_() {
 	fi
 }
 warn() {
+	if [ -z "$*" ]; then return 0; fi
 	echo "$@" | while IFS= read -r line; do warn_ "$line"; done
 }
 error_() {
 	printf "%b ${Red}%s${Color_Off}\n" "${DRed}[${Red}ERROR${DRed}]${Color_Off}" "$(recolor "${Red_Code}" <<< "$@")" >&2
 }
 error() {
-	echo -e "$@" | while IFS= read -r line; do error_ "$line"; done
+	if [ -z "$*" ]; then return 0; fi
+	echo "$@" | while IFS= read -r line; do error_ "$line"; done
 }
 success_() {
 	printf '%b %s\n' "   ${DGreen}[${Green}OK${DGreen}]${Color_Off}" "$@" >&2
 }
 success() {
+	if [ -z "$*" ]; then return 0; fi
 	echo "$@" | while IFS= read -r line; do success_ "$line"; done
 }
 question_() {
 	printf '%b %s\n' "  ${DCyan}[${Cyan}???${DCyan}]${Color_Off}" "$@" >&2
 }
 question() {
+	if [ -z "$*" ]; then return 0; fi
 	echo "$@" | while IFS= read -r line; do question_ "$line"; done
 }
 dry_run_() {
@@ -77,6 +84,7 @@ dry_run_() {
 	fi
 }
 dry_run() {
+	if [ -z "$*" ]; then return 0; fi
 	echo "$@" | while IFS= read -r line; do dry_run_ "$line"; done
 }
 
