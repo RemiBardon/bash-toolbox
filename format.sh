@@ -2,8 +2,16 @@
 
 source "${BASH_TOOLBOX-"$(dirname "$0")"}"/colors.sh
 
-format_secondary() {
+format_secondary_() {
 	printf "${Dark}%s${Dark_Off}" "$(decolor <<< "$@")"
+}
+format_secondary() {
+	if [[ "$@" == *$'\n'* ]]; then
+		# Text is multiline, format each line independently to support colored prefixing.
+		echo "$@" | while IFS= read -r line; do printf '%s\n' "$(format_secondary_ "$line")"; done
+	else
+		format_secondary_ "$@"
+	fi
 }
 format_url() {
 	printf "${Underline}%s${Underline_Off}" "$(decolor <<< "$@")"
