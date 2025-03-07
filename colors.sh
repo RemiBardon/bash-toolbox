@@ -6,6 +6,16 @@
 Color_Off='\033[0m'       # Text Reset
 
 # Regular Colors
+Black_Code='30'
+Red_Code='31'
+Green_Code='32'
+Yellow_Code='33'
+Blue_Code='34'
+Purple_Code='35'
+Cyan_Code='36'
+White_Code='37'
+
+# Regular Colors
 Black='\033[0;30m'        # Black
 Red='\033[0;31m'          # Red
 Green='\033[0;32m'        # Green
@@ -91,11 +101,21 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
-ANSI_ESC='\\\033\['
+ANSI_ESC='\x1b\['
+ANSI_ESC_ESC='\\\033\['
 ANSI_NO_DECOLOR='(4|24)m'
 
 decolor() {
-	sed -r 's/('"${ANSI_ESC}"')('"${ANSI_NO_DECOLOR}"')/\1%%%\2/g' \
-		| sed -r 's/'"${ANSI_ESC}"'[0-9;]+m//g' \
-		| sed -r 's/('"${ANSI_ESC}"')%%%('"${ANSI_NO_DECOLOR}"')/\1\2/g'
+	sed -r 's/('"${ANSI_ESC}|${ANSI_ESC_ESC}"')('"${ANSI_NO_DECOLOR}"')/\1%%%\2/g' \
+		| sed -r 's/'"(${ANSI_ESC}|${ANSI_ESC_ESC})"'[0-9;]+m//g' \
+		| sed -r 's/('"${ANSI_ESC}|${ANSI_ESC_ESC}"')%%%('"${ANSI_NO_DECOLOR}"')/\1\2/g'
+}
+
+recolor() {
+	local new_color="${1:?}"
+	sed -r 's/('"${ANSI_ESC}|${ANSI_ESC_ESC}"')('"${ANSI_NO_DECOLOR}"')/\1%%%\2/g' \
+		| sed -r 's/'"(${ANSI_ESC}|${ANSI_ESC_ESC})"'([0-9]+;)[0-9]+(m)/\1\2'"${new_color}"'\3/g' \
+		| sed -r 's/'"(${ANSI_ESC}|${ANSI_ESC_ESC})"'0m/\1'"0;${new_color}m"'/g' \
+		| sed -r 's/('"${ANSI_ESC}|${ANSI_ESC_ESC}"')%%%('"${ANSI_NO_DECOLOR}"')/\1\2/g' \
+		| sed -r 's/(.+)/'"${ANSI_ESC}0;${new_color}m"'\1'"${ANSI_ESC}0m"'/'
 }

@@ -45,14 +45,14 @@ info() {
 }
 warn_() {
 	if (( ${LOG_WARN:-0} )); then
-		printf " ${DYellow}[${Yellow}WARN${DYellow}]${Color_Off} ${Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2
+		printf " ${DYellow}[${Yellow}WARN${DYellow}]${Color_Off} ${Yellow}$(recolor "${Yellow_Code}" <<< "$@")${Color_Off}\n" >&2
 	fi
 }
 warn() {
 	echo "$@" | while IFS= read -r line; do warn_ "$line"; done
 }
 error_() {
-	printf "${DRed}[${Red}ERROR${DRed}]${Color_Off} ${Red}$(decolor <<< "$@")${Color_Off}\n" >&2
+	printf "${DRed}[${Red}ERROR${DRed}]${Color_Off} ${Red}$(recolor "${Red_Code}" <<< "$@")${Color_Off}\n" >&2
 }
 error() {
 	echo -e "$@" | while IFS= read -r line; do error_ "$line"; done

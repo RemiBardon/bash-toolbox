@@ -23,6 +23,10 @@ printf "You can also print $(format_hyperlink 'hyperlinks' 'https://github.com/R
 printf "\n${Bold}# Decoloring${Bold_Off}\n\n"
 printf "Some $(format_code "decolored inline code" | decolor) and some $(format_url "decolored URL" | decolor).\n"
 
+printf "\n${Bold}# Recoloring${Bold_Off}\n\n"
+printf "Some ${BRed}bold red${Color_Off}, some $(format_secondary 'secondary text') and some $(format_url "URL").\n"
+printf "$(recolor "${Green_Code}" <<< "Some recolored ${BRed}bold red${Color_Off}, some $(format_secondary 'secondary text') and some $(format_url "URL").\n")"
+
 source "${BASH_TOOLBOX:?}"/log.sh
 printf "\n${Bold}# Logging${Bold_Off}\n\n"
 
