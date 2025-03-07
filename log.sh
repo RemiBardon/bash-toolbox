@@ -25,7 +25,7 @@ trace_() {
 	fi
 }
 trace() {
-	echo "$@" | while read -r line; do trace_ "$line"; done
+	echo "$@" | while IFS= read -r line; do trace_ "$line"; done
 }
 debug_() {
 	if (( ${LOG_DEBUG:-0} )); then
@@ -33,7 +33,7 @@ debug_() {
 	fi
 }
 debug() {
-	echo "$@" | while read -r line; do debug_ "$line"; done
+	echo "$@" | while IFS= read -r line; do debug_ "$line"; done
 }
 info_() {
 	if (( ${LOG_INFO:-0} )); then
@@ -41,7 +41,7 @@ info_() {
 	fi
 }
 info() {
-	echo "$@" | while read -r line; do info_ "$line"; done
+	echo "$@" | while IFS= read -r line; do info_ "$line"; done
 }
 warn_() {
 	if (( ${LOG_WARN:-0} )); then
@@ -49,25 +49,25 @@ warn_() {
 	fi
 }
 warn() {
-	echo "$@" | while read -r line; do warn_ "$line"; done
+	echo "$@" | while IFS= read -r line; do warn_ "$line"; done
 }
 error_() {
 	printf "${DRed}[${Red}ERROR${DRed}]${Color_Off} ${Red}$(decolor <<< "$@")${Color_Off}\n" >&2
 }
 error() {
-	echo "$@" | while read -r line; do error_ "$line"; done
+	echo -e "$@" | while IFS= read -r line; do error_ "$line"; done
 }
 success_() {
 	printf "   ${DGreen}[${Green}OK${DGreen}]${Color_Off} $@\n" >&2
 }
 success() {
-	echo "$@" | while read -r line; do success_ "$line"; done
+	echo "$@" | while IFS= read -r line; do success_ "$line"; done
 }
 question_() {
 	printf "  ${DCyan}[${Cyan}???${DCyan}]${Color_Off} $@\n" >&2
 }
 question() {
-	echo "$@" | while read -r line; do question_ "$line"; done
+	echo "$@" | while IFS= read -r line; do question_ "$line"; done
 }
 dry_run_() {
 	# NOTE: Remove leading underscore-prefixed functions, to avoid logging things like `log_as_info_`.
@@ -77,24 +77,24 @@ dry_run_() {
 	fi
 }
 dry_run() {
-	echo "$@" | while read -r line; do dry_run_ "$line"; done
+	echo "$@" | while IFS= read -r line; do dry_run_ "$line"; done
 }
 
 log_as_trace_() {
-	( set -o pipefail; "$@" 2>&1 | while read -r line; do trace_ "$line"; done )
+	( set -o pipefail; "$@" 2>&1 | while IFS= read -r line; do trace_ "$line"; done )
 }
 log_as_debug_() {
-	( set -o pipefail; "$@" 2>&1 | while read -r line; do debug_ "$line"; done )
+	( set -o pipefail; "$@" 2>&1 | while IFS= read -r line; do debug_ "$line"; done )
 }
 log_as_info_() {
-	( set -o pipefail; "$@" 2>&1 | while read -r line; do info_ "$line"; done )
+	( set -o pipefail; "$@" 2>&1 | while IFS= read -r line; do info_ "$line"; done )
 }
 log_as_warn_() {
-	( set -o pipefail; "$@" 2>&1 | while read -r line; do warn_ "$line"; done )
+	( set -o pipefail; "$@" 2>&1 | while IFS= read -r line; do warn_ "$line"; done )
 }
 log_as_error_() {
-	( set -o pipefail; "$@" 2>&1 | while read -r line; do error_ "$line"; done )
+	( set -o pipefail; "$@" 2>&1 | while IFS= read -r line; do error_ "$line"; done )
 }
 log_as_success_() {
-	( set -o pipefail; "$@" 2>&1 | while read -r line; do success_ "$line"; done )
+	( set -o pipefail; "$@" 2>&1 | while IFS= read -r line; do success_ "$line"; done )
 }
