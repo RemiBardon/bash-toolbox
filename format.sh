@@ -35,5 +35,5 @@ format_title() {
 	printf '%s' "${BGreen}$(decolor <<< "$@")${Color_Off}"
 }
 format_subtitle() {
-	printf '%s' "${Green}$(decolor <<< "$@")${Color_Off}"
+	printf '%s' "${UGreen}$(decolor <<< "$@")${Color_Off}"
 }
