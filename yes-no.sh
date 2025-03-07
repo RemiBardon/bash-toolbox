@@ -10,9 +10,9 @@ ask-yes-no() {
 		esac
 	}
 
-	printf "${LOGGER_MARGIN}${BCyan}Answer ($(choices)): "
+	printf '%b' "${LOGGER_MARGIN}${BCyan}Answer ($(choices)): "
 	read -n 1 yes_no_answer
-	printf "${Color_Off}\n"
+	printf '%b' "${Color_Off}\n"
 	case "${yes_no_answer:-"${yes_no_default}"}" in
 		y|Y) return 0 ;;
 		n|N|*) return 1 ;;

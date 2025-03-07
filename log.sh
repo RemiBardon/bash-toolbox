@@ -21,7 +21,7 @@ LOGGER_MARGIN="        "
 
 trace_() {
 	if (( ${LOG_TRACE:-0} )); then
-		printf "${DPurple}[${Purple}TRACE${DPurple}]${Color_Off} $(format_secondary "$@")\n" >&2
+		printf '%b %s\n' "${DPurple}[${Purple}TRACE${DPurple}]${Color_Off}" "$(format_secondary "$@")" >&2
 	fi
 }
 trace() {
@@ -29,7 +29,7 @@ trace() {
 }
 debug_() {
 	if (( ${LOG_DEBUG:-0} )); then
-		printf "${DWhite}[${White}DEBUG${DWhite}]${Color_Off} ${Black}${On_Yellow}$(decolor <<< "$@")${Color_Off}\n" >&2
+		printf "%b ${Black}${On_Yellow}%s${Color_Off}\n" "${DWhite}[${White}DEBUG${DWhite}]${Color_Off}" "$(decolor <<< "$@")" >&2
 	fi
 }
 debug() {
@@ -37,7 +37,7 @@ debug() {
 }
 info_() {
 	if (( ${LOG_INFO:-0} )); then
-		printf " ${DBlue}[${Blue}INFO${DBlue}]${Color_Off} $@\n" >&2
+		printf '%b %s\n' " ${DBlue}[${Blue}INFO${DBlue}]${Color_Off}" "$@" >&2
 	fi
 }
 info() {
@@ -45,26 +45,26 @@ info() {
 }
 warn_() {
 	if (( ${LOG_WARN:-0} )); then
-		printf " ${DYellow}[${Yellow}WARN${DYellow}]${Color_Off} ${Yellow}$(recolor "${Yellow_Code}" <<< "$@")${Color_Off}\n" >&2
+		printf "%b ${Red}%s${Color_Off}\n" " ${DYellow}[${Yellow}WARN${DYellow}]${Color_Off}" "$(recolor "${Yellow_Code}" <<< "$@")" >&2
 	fi
 }
 warn() {
 	echo "$@" | while IFS= read -r line; do warn_ "$line"; done
 }
 error_() {
-	printf "${DRed}[${Red}ERROR${DRed}]${Color_Off} ${Red}$(recolor "${Red_Code}" <<< "$@")${Color_Off}\n" >&2
+	printf "%b ${Red}%s${Color_Off}\n" "${DRed}[${Red}ERROR${DRed}]${Color_Off}" "$(recolor "${Red_Code}" <<< "$@")" >&2
 }
 error() {
 	echo -e "$@" | while IFS= read -r line; do error_ "$line"; done
 }
 success_() {
-	printf "   ${DGreen}[${Green}OK${DGreen}]${Color_Off} $@\n" >&2
+	printf '%b %s\n' "   ${DGreen}[${Green}OK${DGreen}]${Color_Off}" "$@" >&2
 }
 success() {
 	echo "$@" | while IFS= read -r line; do success_ "$line"; done
 }
 question_() {
-	printf "  ${DCyan}[${Cyan}???${DCyan}]${Color_Off} $@\n" >&2
+	printf '%b %s\n' "  ${DCyan}[${Cyan}???${DCyan}]${Color_Off}" "$@" >&2
 }
 question() {
 	echo "$@" | while IFS= read -r line; do question_ "$line"; done
@@ -73,7 +73,7 @@ dry_run_() {
 	# NOTE: Remove leading underscore-prefixed functions, to avoid logging things like `log_as_info_`.
 	local command=$(echo "$@" | sed -E 's/^([a-zA-Z0-9_]*_ )+//')
 	if (( ${LOG_DRY_RUN:-0} )); then
-		printf "${DWhite}[${White}DRY_RUN${DWhite}]${Color_Off} sh> $(format_secondary $command)\n" >&2
+		printf '%b %s\n' "${DWhite}[${White}DRY_RUN${DWhite}]${Color_Off}" "sh> $(format_secondary $command)" >&2
 	fi
 }
 dry_run() {
