@@ -119,3 +119,53 @@ recolor() {
 		| sed -r 's/('"${ANSI_ESC}|${ANSI_ESC_ESC}"')%%%('"${ANSI_NO_DECOLOR}"')/\1\2/g' \
 		| sed -r 's/(.+)/'"${ANSI_ESC}0;${new_color}m"'\1'"${ANSI_ESC}0m"'/'
 }
+
+fg-black() {
+	printf "${Black}%s${Color_Off}" "$*"
+}
+fg-red() {
+	printf "${Red}%s${Color_Off}" "$*"
+}
+fg-green() {
+	printf "${Green}%s${Color_Off}" "$*"
+}
+fg-yellow() {
+	printf "${Yellow}%s${Color_Off}" "$*"
+}
+fg-blue() {
+	printf "${Blue}%s${Color_Off}" "$*"
+}
+fg-purple() {
+	printf "${Purple}%s${Color_Off}" "$*"
+}
+fg-cyan() {
+	printf "${Cyan}%s${Color_Off}" "$*"
+}
+fg-white() {
+	printf "${White}%s${Color_Off}" "$*"
+}
+
+bg-black() {
+	printf "${On_Black}%s${Color_Off}" "$*"
+}
+bg-red() {
+	printf "${On_Red}%s${Color_Off}" "$*"
+}
+bg-green() {
+	printf "${On_Green}%s${Color_Off}" "$*"
+}
+bg-yellow() {
+	printf "${On_Yellow}%s${Color_Off}" "$*"
+}
+bg-blue() {
+	printf "${On_Blue}%s${Color_Off}" "$*"
+}
+bg-purple() {
+	printf "${On_Purple}%s${Color_Off}" "$*"
+}
+bg-cyan() {
+	printf "${On_Cyan}%s${Color_Off}" "$*"
+}
+bg-white() {
+	printf "${On_White}%s${Color_Off}" "$*"
+}
